@@ -6,5 +6,6 @@ package controller;
  */
 
 public class PuissanceController {
+	
 
 }

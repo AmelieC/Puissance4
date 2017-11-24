@@ -22,7 +22,14 @@ public class PuissanceVue implements Observer {
 		this.grilleJeuModel = grilleJeuModel;
 		this.joueurModel = joueurModel;
 		this.puissanceController = puissanceController;
+		
 	}
+	
+	
+	//on précise que cette classe observe les models
+	joueurModel.addObserver(this);
+	grilleJeuModel.addObserver(this);
+    
 		
 	
 	
