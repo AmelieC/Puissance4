@@ -1,4 +1,5 @@
-/**
+
+	/**
  * 
  */
 package model;
@@ -25,6 +26,10 @@ public class JoueurModel extends Observable {
 		this.couleur = couleur;
 		this.indicePionAPositionner = 0;
 		this.casePionAPositionner = 0;
+		
+		pion =new PionModel[1];
+		pion [1] = new PionModel ("jaune");
+		pion [1] = new PionModel ("rouge");
 		
 		
 	}
