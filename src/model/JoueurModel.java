@@ -1,5 +1,5 @@
 
-	/**
+/**
  * 
  */
 package model;
@@ -28,8 +28,8 @@ public class JoueurModel extends Observable {
 		this.casePionAPositionner = 0;
 		
 		pion =new PionModel[1];
-		pion [1] = new PionModel ("jaune");
-		pion [1] = new PionModel ("rouge");
+		pion [1] = new PionModel ();
+		pion [1] = new PionModel ();
 		
 		
 	}
@@ -118,3 +118,4 @@ public class JoueurModel extends Observable {
 	
 
 }
+
