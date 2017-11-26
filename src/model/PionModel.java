@@ -10,7 +10,7 @@ import java.util.Observable;
 
 public class PionModel extends Observable {
 	
-	public class BateauModel extends Observable {
+	public class PionModel extends Observable {
 		
 
 		private String couleur;
@@ -23,6 +23,10 @@ public class PionModel extends Observable {
 		 * @param position
 		 * @return 
 		 */
+		
+		public void PionModel (String couleur){
+			this.couleur = couleur;
+		}
 		public void PionModel(String couleur,CaseModel[] position){
 			
 			this.couleur=couleur;
@@ -71,4 +75,7 @@ public class PionModel extends Observable {
 		}
 
 	}
+
+
 }
+
