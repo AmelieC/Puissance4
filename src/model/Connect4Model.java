@@ -8,7 +8,6 @@ public class Connect4Model extends Observable {
 	
 	public String[][] createBoard() 
 	{
-		
 		for(int i = 0;i < board.length; i++)
 		{
 			for(int j = 0;j < board[i].length; j++) 
@@ -87,51 +86,51 @@ public class Connect4Model extends Observable {
 			for (int j = 0;j < 3;j++)
 			{
 				if((b[j][i] != " ")
-		        && (b[j + 1][i] != " ")
-	            && (b[j + 2][i] != " ")
-	            && (b[j + 3][i] != " ")
-	            && ((b[j][i] == b[j + 1][i])
-	            && (b[j + 1][i] == b[j + 2][i])
-	            && (b[j + 2][i] == b[j + 3][i])))
+				&& (b[j + 1][i] != " ")
+				&& (b[j + 2][i] != " ")
+				&& (b[j + 3][i] != " ")
+				&& ((b[j][i] == b[j + 1][i])
+				&& (b[j + 1][i] == b[j + 2][i])
+				&& (b[j + 2][i] == b[j + 3][i])))
 				{
-					return b[j][i]; 
-				} 
+					return b[j][i];
+				}
 			}
 		}
 		
 		for (int i=0;i<3;i++)
-	    {
+		{
 			for (int j=1;j<9;j+=2)
 			{
-	            if((b[i][j] != " ")
-	            && (b[i+1][j+2] != " ")
-	            && (b[i+2][j+4] != " ")
-	            && (b[i+3][j+6] != " ")
-	            && ((b[i][j] == b[i+1][j+2])
-	            && (b[i+1][j+2] == b[i+2][j+4])
-	            && (b[i+2][j+4] == b[i+3][j+6]))) 
-	            {
-	              return b[i][j]; 
-	            }
+				if((b[i][j] != " ")
+				&& (b[i+1][j+2] != " ")
+				&& (b[i+2][j+4] != " ")
+				&& (b[i+3][j+6] != " ")
+				&& ((b[i][j] == b[i+1][j+2])
+				&& (b[i+1][j+2] == b[i+2][j+4])
+				&& (b[i+2][j+4] == b[i+3][j+6])))
+				{
+					return b[i][j]; 
+				}
 			}
-	    }
+		}
 		
 		for (int i=0;i<3;i++)
-	    {
+		{
 			for (int j=7;j<15;j+=2)
-		    {
-	            if((b[i][j] != " ")
-	            && (b[i+1][j-2] != " ")
-	            && (b[i+2][j-4] != " ")
-	            && (b[i+3][j-6] != " ")
-	            && ((b[i][j] == b[i+1][j-2])
-	            && (b[i+1][j-2] == b[i+2][j-4])
-	            && (b[i+2][j-4] == b[i+3][j-6])))
-	            {
-	            	return b[i][j]; 
-	            }
-		    } 
-	    }
+			{
+				if((b[i][j] != " ")
+				&& (b[i+1][j-2] != " ")
+				&& (b[i+2][j-4] != " ")
+				&& (b[i+3][j-6] != " ")
+				&& ((b[i][j] == b[i+1][j-2])
+				&& (b[i+1][j-2] == b[i+2][j-4])
+				&& (b[i+2][j-4] == b[i+3][j-6])))
+				{
+					return b[i][j]; 
+				}
+			} 
+		}
 		
 		return null;
 	}
