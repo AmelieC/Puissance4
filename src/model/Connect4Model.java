@@ -3,6 +3,7 @@ import java.util.Observable;
 
 public class Connect4Model extends Observable {
 	
+	public boolean isGameRunning;
 	public String[][] board = new String[7][15]; 
 	
 	public String[][] createBoard() 
@@ -27,6 +28,8 @@ public class Connect4Model extends Observable {
 			}
 		}
 		
+		setChanged();
+		notifyObservers();
 		return board;
 	}
 	
@@ -40,6 +43,7 @@ public class Connect4Model extends Observable {
 				break;
 			}
 		}
+		
 		setChanged();
 		notifyObservers();
 	}
@@ -54,6 +58,7 @@ public class Connect4Model extends Observable {
 				break;
 			}
 		}
+		
 		setChanged();
 		notifyObservers();
 	}
