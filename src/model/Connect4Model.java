@@ -3,31 +3,14 @@ import java.util.Observable;
 
 public class Connect4Model extends Observable {
 	
-	public boolean isGameRunning;
-	public String[][] board = new String[7][15]; 
+	private boolean isGameRunning;
+	private int nbTurn;
+	private String[][] board = new String[7][15]; 
 	
 	public Connect4Model() 
 	{
-		for(int i = 0;i < board.length; i++)
-		{
-			for(int j = 0;j < board[i].length; j++) 
-			{
-				if(j % 2 == 0) 
-				{
-					board[i][j] = "|";
-				}else
-				{
-					board[i][j] = " ";
-				}
-				
-				if(i == 6)
-				{
-					board[i][j] = "-";
-				}
-			}
-		}
+		setEmptyBoard();
 	}
-	
 	
 	public void playRedDisk(String[][] b, int x) 
 	{
@@ -130,5 +113,56 @@ public class Connect4Model extends Observable {
 		}
 		
 		return null;
+	}
+	
+	public boolean getIsGameRunning() 
+	{
+		return this.isGameRunning;
+	}
+	
+	public void setIsGameRunning(boolean x) 
+	{
+		this.isGameRunning = x;
+	}
+	
+	public int getNbTurn() 
+	{
+		return this.nbTurn;
+	}
+	
+	public void setNbTurn(int x) 
+	{
+		this.nbTurn = x;
+	}
+	
+	
+	public String[][] getBoard()
+	{
+		return this.board;
+	}
+	
+	public void setEmptyBoard() 
+	{
+		for(int i = 0;i < board.length; i++)
+		{
+			for(int j = 0;j < board[i].length; j++) 
+			{
+				if(j % 2 == 0) 
+				{
+					board[i][j] = "|";
+				}else
+				{
+					board[i][j] = " ";
+				}
+				
+				if(i == 6)
+				{
+					board[i][j] = "-";
+				}
+			}
+		}
+		
+		setChanged();
+		notifyObservers();
 	}
 }
