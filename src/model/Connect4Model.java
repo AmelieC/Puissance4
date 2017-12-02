@@ -6,7 +6,7 @@ public class Connect4Model extends Observable {
 	public boolean isGameRunning;
 	public String[][] board = new String[7][15]; 
 	
-	public String[][] createBoard() 
+	public Connect4Model() 
 	{
 		for(int i = 0;i < board.length; i++)
 		{
@@ -26,11 +26,8 @@ public class Connect4Model extends Observable {
 				}
 			}
 		}
-		
-		setChanged();
-		notifyObservers();
-		return board;
 	}
+	
 	
 	public void playRedDisk(String[][] b, int x) 
 	{
