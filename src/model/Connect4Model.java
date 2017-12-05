@@ -13,12 +13,12 @@ public class Connect4Model extends Observable {
 	}
 	
 	public void playRedDisk(String[][] b, int x) 
-	{
+	{	
 		for(int i = 5; i >= 0; i--) 
 		{
-			if(b[i][x] == " ") 
+			if(b[i][x - 2] == " ") 
 			{
-				b[i][x] = "R";
+				b[i][x - 2] = "R";
 				break;
 			}
 		}
@@ -28,12 +28,12 @@ public class Connect4Model extends Observable {
 	}
 	
 	public void playYellowDisk(String [][] b, int x) 
-	{
+	{	
 		for(int i = 5; i >= 0; i--) 
 		{
-			if(b[i][x] == " ") 
+			if(b[i][x - 2] == " ") 
 			{
-				b[i][x] = "Y";
+				b[i][x - 2] = "Y";
 				break;
 			}
 		}

@@ -9,6 +9,7 @@ import model.Connect4Model;
 public class Connect4ConsolView extends Connect4View implements Observer {
 
 	protected Scanner sc;
+	protected boolean isNotValid;
 	
 	public Connect4ConsolView(Connect4Model model, Connect4Controller controller) 
 	{
@@ -33,27 +34,55 @@ public class Connect4ConsolView extends Connect4View implements Observer {
 		controller.setIsGameRunning(true);
 		displayBoard();
 		
-		while(controller.getIsGameRunning()) 
+		while(model.getIsGameRunning()) 
 		{
-			if(controller.getNbTurn() % 2 == 0) 
+			if(model.getNbTurn() % 2 == 0) 
 			{
-				System.out.println("Player 1: drop a red disk (0-6)");
-				sc = new Scanner(System.in);
-				controller.playRedDisk(controller.getBoard(), 2 * sc.nextInt() + 1);
-				controller.setNbTurn(controller.getNbTurn() + 1);
+				do
+				{
+					System.out.println("Player 1: drop a red disk (1-7)");
+					sc = new Scanner(System.in);
+					int answer = sc.nextInt();
+					if(answer >= 1 && answer <= 7) 
+					{
+						controller.playRedDisk(model.getBoard(), 2 * answer + 1);
+						controller.setNbTurn(model.getNbTurn() + 1);
+						this.isNotValid = false;
+					}
+					else 
+					{
+						System.out.println("Please enter a valid column digit");
+						this.isNotValid = true;
+					}
+				
+				}while(isNotValid);
 				
 			}
 			else 
 			{
-				System.out.println("Player 2: drop a yellow disk (0-6)");
-				sc = new Scanner(System.in);
-				controller.playYellowDisk(controller.getBoard(), 2 * sc.nextInt() + 1);
-				controller.setNbTurn(controller.getNbTurn() + 1);
+				do
+				{
+					System.out.println("Player 1: drop a yellow disk (1-7)");
+					sc = new Scanner(System.in);
+					int answer = sc.nextInt();
+					if(answer >= 1 && answer <= 7) 
+					{
+						controller.playYellowDisk(model.getBoard(), 2 * answer + 1);
+						controller.setNbTurn(model.getNbTurn() + 1);
+						this.isNotValid = false;
+					}
+					else 
+					{
+						System.out.println("Please enter a valid column digit");
+						this.isNotValid = true;
+					}
+				
+				}while(isNotValid);
 			}
 			
-			if(controller.checkIfWinner(controller.getBoard()) != null) 
+			if(controller.checkIfWinner(model.getBoard()) != null) 
 			{
-				if(controller.checkIfWinner(controller.getBoard()) == "R") 
+				if(controller.checkIfWinner(model.getBoard()) == "R") 
 				{
 					System.out.println("The player 1 (red) won");
 				}

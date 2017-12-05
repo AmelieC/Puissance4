@@ -25,29 +25,14 @@ public class Connect4Controller {
 		return model.checkIfWinner(board);
 	}
 	
-	public boolean getIsGameRunning() 
-	{
-		return model.getIsGameRunning();
-	}
-	
 	public void setIsGameRunning(boolean x) 
 	{
 		model.setIsGameRunning(x);
 	}
 	
-	public int getNbTurn() 
-	{
-		return model.getNbTurn();
-	}
-	
 	public void setNbTurn(int x) 
 	{
 		model.setNbTurn(x);
-	}
-	
-	public String[][] getBoard()
-	{
-		return model.getBoard();
 	}
 	
 	public void setEmptyBoard() 
