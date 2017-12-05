@@ -7,17 +7,25 @@ import java.util.Scanner;
 import controller.Connect4Controller;
 import model.Connect4Model;
 
-public class Connect4ConsolView extends Connect4View implements Observer {
+/**
+ * This class represents how the console view should interact
+ * 
+ * @author A.Courtin, M.Duchene, F.Salpietro.
+ */
+public class Connect4ConsoleView extends Connect4View implements Observer {
 
-	protected Scanner sc;
-	protected int answer;
-	protected boolean isNotValid;
+	protected Scanner sc; //The scanner that will register user's input
+	protected int answer; //the user's answer
+	protected boolean isNotValid; //define whether the input is valid or not
 	
-	public Connect4ConsolView(Connect4Model model, Connect4Controller controller) 
+	public Connect4ConsoleView(Connect4Model model, Connect4Controller controller) 
 	{
 		super(model, controller);
 	}
 	
+	/**
+	 * Method that display the current model's board in console.
+	 */
 	public void displayBoard()
 	{
 		for (int i = 0;i < model.getBoard().length;i++)
@@ -31,9 +39,12 @@ public class Connect4ConsolView extends Connect4View implements Observer {
 	    }
 	}
 	
+	/**
+	 * The central method of the console view that will control how it react
+	 */
 	public void start() 
 	{
-		controller.setIsGameRunning(true);
+		controller.setIsGameRunning(true); 
 		displayBoard();
 		
 		while(model.getIsGameRunning()) 
@@ -142,6 +153,9 @@ public class Connect4ConsolView extends Connect4View implements Observer {
 		sc.close();
 	}
 	
+	/**
+	 * Method that is triggers when the observer is altered.
+	 */
 	public void update(Observable o, Object arg) 
 	{
 		displayBoard();

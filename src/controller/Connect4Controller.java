@@ -1,9 +1,14 @@
 package controller;
 import model.Connect4Model;
 
+/**
+ * This class contents the action a view can do to alter the model
+ * 
+ * @author A.Courtin, M.Duchene, F.Salpietro.
+ */
 public class Connect4Controller {
 
-	private Connect4Model model;
+	private Connect4Model model; //the model the controller will alter 
 	
 	public Connect4Controller(Connect4Model model) 
 	{
