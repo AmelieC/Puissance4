@@ -1,4 +1,5 @@
 package view;
+import java.util.InputMismatchException;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Scanner;
@@ -9,6 +10,7 @@ import model.Connect4Model;
 public class Connect4ConsolView extends Connect4View implements Observer {
 
 	protected Scanner sc;
+	protected int answer;
 	protected boolean isNotValid;
 	
 	public Connect4ConsolView(Connect4Model model, Connect4Controller controller) 
@@ -42,7 +44,16 @@ public class Connect4ConsolView extends Connect4View implements Observer {
 				{
 					System.out.println("Player 1: drop a red disk (1-7)");
 					sc = new Scanner(System.in);
-					int answer = sc.nextInt();
+					
+					try 
+					{
+						answer = sc.nextInt();
+					}
+					catch(InputMismatchException e) 
+					{
+						answer = -1;
+					}
+					
 					if(answer >= 1 && answer <= 7) 
 					{
 						controller.playRedDisk(model.getBoard(), 2 * answer + 1);
@@ -64,7 +75,16 @@ public class Connect4ConsolView extends Connect4View implements Observer {
 				{
 					System.out.println("Player 1: drop a yellow disk (1-7)");
 					sc = new Scanner(System.in);
-					int answer = sc.nextInt();
+					
+					try 
+					{
+						answer = sc.nextInt();
+					}
+					catch(InputMismatchException e)
+					{
+						answer = -1;
+					}
+					
 					if(answer >= 1 && answer <= 7) 
 					{
 						controller.playYellowDisk(model.getBoard(), 2 * answer + 1);
@@ -91,19 +111,31 @@ public class Connect4ConsolView extends Connect4View implements Observer {
 					System.out.println("The player 2 (yellow) won");
 				}
 				
-				System.out.println("Wanna play again ? 0:No - 1:Yes");
-				sc = new Scanner(System.in);
-				int answer = sc.nextInt();
+				do 
+				{
 				
-				if(answer == 0) 
-				{
-					controller.setIsGameRunning(false);
-				}
-				else if(answer == 1) 
-				{
-					controller.setNbTurn(0);
-					controller.setEmptyBoard();
-				}
+					System.out.println("Wanna play again ? 0:No - 1:Yes");
+					sc = new Scanner(System.in);
+					int answer = sc.nextInt();
+					
+					if(answer == 0) 
+					{
+						controller.setIsGameRunning(false);
+						this.isNotValid = false;
+					}
+					else if(answer == 1) 
+					{
+						controller.setNbTurn(0);
+						controller.setEmptyBoard();
+						this.isNotValid = false;
+					}
+					else 
+					{
+						System.out.println("Please enter a valid digit");
+						this.isNotValid = true;
+					}
+				
+				}while(isNotValid);
 			}
 		}
 		
