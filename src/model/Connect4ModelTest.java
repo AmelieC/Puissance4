@@ -27,7 +27,7 @@ class Connect4ModelTest {
 	}
 	
 	@Test
-	void checkIfWinnerTestHorizontal() 
+	void checkIfWinnerTest() 
 	{
 		Connect4Model model = new Connect4Model();
 		
