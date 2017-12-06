@@ -127,7 +127,15 @@ public class Connect4ConsoleView extends Connect4View implements Observer {
 				
 					System.out.println("Wanna play again ? 0:No - 1:Yes");
 					sc = new Scanner(System.in);
-					int answer = sc.nextInt();
+					
+					try 
+					{
+						answer = sc.nextInt();
+					}
+					catch(InputMismatchException e)
+					{
+						answer = -1;
+					}
 					
 					if(answer == 0) 
 					{
