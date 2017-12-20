@@ -192,7 +192,7 @@ public class Connect4Model extends Observable {
 	}
 	
 	/**
-	 * This method empty the potential disk the board contains.
+	 * This method empty the potentials disks the board contains.
 	 */
 	public void setEmptyBoard() 
 	{
