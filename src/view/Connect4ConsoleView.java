@@ -1,6 +1,8 @@
 package view;
+import java.util.InputMismatchException;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Scanner;
 
 import controller.Connect4Controller;
 import model.Connect4Model;
@@ -38,20 +40,79 @@ public class Connect4ConsoleView extends Connect4View implements Observer {
 	 */
 	public void start() 
 	{
+		
+		Scanner sc = new Scanner(System.in);
+		int answer = 0;
+		boolean isNotValid;
+		
 		controller.setIsGameRunning(true); 
 		displayBoard();
 		
 		while(model.getIsGameRunning()) 
 		{
-			if(model.getNbTurn() % 2 == 0) 
-			{
+			if(model.getNbTurn() % 2 == 0) {
+			
 				
-				controller.playRedDiskConsol();
+				do
+				{
+					System.out.println("Player 1: drop a red disk (1-7)");
+				
+					try 
+					{
+						answer = sc.nextInt();
+					}
+					catch(InputMismatchException e) 
+					{
+						answer = -1;
+					}
+					
+					if(answer >= 1 && answer <= 7) 
+					{
+
+						isNotValid = false;
+					}
+					else 
+					{
+						System.out.println("Please enter a valid column digit");
+						isNotValid = true;
+					}
+				
+				}while(isNotValid);
+				
+				controller.playRedDisk(answer);
 			}
 			else 
 			{
-				controller.playYellowDiskConsol();
+				
+				do
+				{
+					System.out.println("Player 1: drop a yellow disk (1-7)");
+				
+					try 
+					{
+						answer = sc.nextInt();
+					}
+					catch(InputMismatchException e) 
+					{
+						answer = -1;
+					}
+					
+					if(answer >= 1 && answer <= 7) 
+					{
+
+						isNotValid = false;
+					}
+					else 
+					{
+						System.out.println("Please enter a valid column digit");
+						isNotValid = true;
+					}
+				
+				}while(isNotValid);
+				
+				controller.playYellowDisk(answer);
 			}
+			
 			
 			if(controller.checkIfWinner(model.getBoard()) != null) 
 			{
@@ -64,12 +125,44 @@ public class Connect4ConsoleView extends Connect4View implements Observer {
 					System.out.println("The player 2 (yellow) won");
 				}
 				
-				controller.replayProposalConsol();
+				controller.empty();
+				
+				do 
+				{
+					System.out.println("Wanna play again ? 0:No - 1:Yes");
+					
+					try 
+					{
+						answer = sc.nextInt();
+					}
+					catch(InputMismatchException e)
+					{
+						answer = -1;
+					}
+					
+					if(answer == 0) 
+					{
+						controller.quit();
+						isNotValid = false;
+					}
+					else if(answer == 1) 
+					{
+						controller.replay();
+						isNotValid = false;
+					}
+					else 
+					{
+						System.out.println("Please enter a valid digit");
+						isNotValid = true;
+					}
+				
+				}while(isNotValid);
 			}
 		}
+}
 		
 		//sc.close();
-	}
+
 	
 	/**
 	 * Method that is triggers when the observer is altered.

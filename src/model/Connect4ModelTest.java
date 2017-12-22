@@ -16,6 +16,7 @@ class Connect4ModelTest {
 		assertEquals(arrayTest, model.getBoard());
 	}
 	
+
 	@Test
 	void playYellowDiskTest() 
 	{
