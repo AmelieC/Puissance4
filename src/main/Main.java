@@ -2,6 +2,7 @@ package main;
 import controller.Connect4Controller;
 import model.Connect4Model;
 import view.Connect4ConsoleView;
+import view.Connect4GUIView;
 
 /**
  * Main method of the project that links the MVC model.
