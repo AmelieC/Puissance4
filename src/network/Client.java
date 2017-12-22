@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -19,47 +20,32 @@ import java.net.UnknownHostException;
  */
 public class Client {
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		/*
-		 * L'objet socket a besoin de l'IP et du Port du ServerSocket
-		 */
-                Socket client = null;
-		try {
-			client = new Socket("localhost", 11111);
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-			System.exit(0);
-		} catch (IOException e) {
-			e.printStackTrace();
-			System.exit(0);
-		}
-		
-		
-		/*
-		 * Création des objets permettant de communiquer avec le client
-		 */
-		PrintStream output = null;
-		BufferedReader input = null;
-		try {
-			output = new PrintStream(client.getOutputStream());
-			input = new BufferedReader(new InputStreamReader(client.getInputStream()));
-		} catch (IOException e) {
-			e.printStackTrace();
-			System.exit(0);
-		}
-		
-		/*
-		 * Boucle principale
-		 */
-		while (true) {
-			
-		}
+	private Socket clientSocket;
+	private PrintWriter writer;
 	
+
+	private BufferedReader reader;
+
+	public Client(){
+		try {
+			this.clientSocket = new Socket("localhost", 4242);
+			this.writer = new PrintWriter(this.clientSocket.getOutputStream());
+			this.reader = new BufferedReader(new InputStreamReader(this.clientSocket.getInputStream()));
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
+	
+	public PrintWriter getWriter() {
+		return writer;
+	}
+
+	public BufferedReader getReader() {
+		return reader;
+	}
+	
 }
 
 
