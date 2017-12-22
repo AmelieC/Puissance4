@@ -3,10 +3,14 @@
  */
 package network;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
+import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.UnknownHostException;
 
 
 /**
@@ -25,7 +29,7 @@ public class Client {
 		 */
                 Socket client = null;
 		try {
-			client = new Socket(<IP>, <PORT_DU_SERVEUR>);
+			client = new Socket("localhost", 11111);
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 			System.exit(0);

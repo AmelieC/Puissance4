@@ -1,8 +1,10 @@
 package controller;
-import java.util.InputMismatchException;
-import java.util.Scanner;
+
+import java.io.IOException;
 
 import model.Connect4Model;
+import network.Server;
+import network.Server.ServerRunner;
 
 /**
  * This class contents the action a view can do to alter the model
@@ -12,113 +14,51 @@ import model.Connect4Model;
 public class Connect4Controller {
 
 	private Connect4Model model; //the model the controller will alter
-	protected Scanner sc;
-	protected boolean isNotValid;
-	protected int answer;
+	private ServerRunner runner;
 	
 	public Connect4Controller(Connect4Model model) 
 	{
 		this.model = model;
 	}
 	
-	public void playRedDiskConsol() 
+	public void playRedDisk(int answer) 
 	{
-		do
-		{
-			System.out.println("Player 1: drop a red disk (1-7)");
-			sc = new Scanner(System.in);
-			
-			try 
-			{
-				answer = sc.nextInt();
+		if(true){
+			try {
+				if(runner != null)
+					this.runner.write(Integer.toString(2*answer+1));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			catch(InputMismatchException e) 
-			{
-				answer = -1;
-			}
-			
-			if(answer >= 1 && answer <= 7) 
-			{
-				model.playRedDisk(model.getBoard(), 2 * answer + 1);
-				model.setNbTurn(model.getNbTurn() + 1);
-				this.isNotValid = false;
-			}
-			else 
-			{
-				System.out.println("Please enter a valid column digit");
-				this.isNotValid = true;
-			}
-		
-		}while(isNotValid);;
+			model.playRedDisk(model.getBoard(), 2 * answer + 1);
+			model.setNbTurn(model.getNbTurn() + 1);
+		}
+	}
+	
+	public void playYellowDisk(int answer) 
+	{
+		if(true){
+			model.playYellowDisk(model.getBoard(), 2 * answer + 1);
+			model.setNbTurn(model.getNbTurn() + 1);	
+		}
+	}
+	
+	public void empty(){
+		model.setNbTurn(0);
+		model.setEmptyBoard();
+	}
+	
+	public void quit(){
+		model.setNbTurn(0);
+		model.setEmptyBoard();
+		this.setIsGameRunning(false);
+	}
+	
+	public void replay() {
 
-	}
-	
-	public void playYellowDiskConsol() 
-	{
-		do
-		{
-			System.out.println("Player 1: drop a yellow disk (1-7)");
-			sc = new Scanner(System.in);
-			
-			try 
-			{
-				answer = sc.nextInt();
-			}
-			catch(InputMismatchException e)
-			{
-				answer = -1;
-			}
-			
-			if(answer >= 1 && answer <= 7) 
-			{
-				model.playYellowDisk(model.getBoard(), 2 * answer + 1);
-				model.setNbTurn(model.getNbTurn() + 1);
-				this.isNotValid = false;
-			}
-			else 
-			{
-				System.out.println("Please enter a valid column digit");
-				this.isNotValid = true;
-			}
-		
-		}while(isNotValid);	
-	}
-	
-	public void replayProposalConsol() 
-	{
-		do 
-		{
-		
-			System.out.println("Wanna play again ? 0:No - 1:Yes");
-			sc = new Scanner(System.in);
-			
-			try 
-			{
-				answer = sc.nextInt();
-			}
-			catch(InputMismatchException e)
-			{
-				answer = -1;
-			}
-			
-			if(answer == 0) 
-			{
-				model.setIsGameRunning(false);
-				this.isNotValid = false;
-			}
-			else if(answer == 1) 
-			{
-				model.setNbTurn(0);
-				model.setEmptyBoard();
-				this.isNotValid = false;
-			}
-			else 
-			{
-				System.out.println("Please enter a valid digit");
-				this.isNotValid = true;
-			}
-		
-		}while(isNotValid);
+		model.setNbTurn(0);
+		model.setEmptyBoard();
 	}
 	
 	public String checkIfWinner(String [][] board) 
@@ -140,4 +80,38 @@ public class Connect4Controller {
 	{
 		model.setEmptyBoard();
 	}
+
+	public void setServer(boolean isServer) {
+		model.setServer(isServer);
+	}
+
+	public void setServerIP(String server) {
+		model.setServerIP(server);
+	}
+
+	public void enableSocket() {
+		if(model.isServer()){
+			Server s = new Server(this);
+			s.start();
+		}else{
+			
+		}
+		
+	}
+
+	public boolean awaitingMessage() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public void setRunner(ServerRunner sr) {
+		this.runner = sr;
+		
+	}
+
+	public void handle(String message) {
+		this.playYellowDisk(Integer.parseInt(message));
+		
+	}
+
 }

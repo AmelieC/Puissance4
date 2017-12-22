@@ -11,6 +11,17 @@ public class Connect4Model extends Observable {
 	
 	private boolean isGameRunning; //define if a game is running or not
 	private int nbTurn; //define the number of the current turn
+	private boolean isServer;
+	
+	public boolean isServer() {
+		return isServer;
+	}
+
+	public String getServerIP() {
+		return serverIP;
+	}
+
+	public String serverIP;
 	
 	/* The board here is composed by a pedestal, which it's represented by
 	 * an additional row, and by separator between columns which 
@@ -217,5 +228,15 @@ public class Connect4Model extends Observable {
 		
 		setChanged();
 		notifyObservers();
+	}
+
+	public void setServer(boolean isServer) {
+		this.isServer = isServer;
+		
+	}
+
+	public void setServerIP(String server) {
+		this.serverIP = server;
+		
 	}
 }
